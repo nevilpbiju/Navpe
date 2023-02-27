@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Activities.MobilePay">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/back6"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:drawablePadding="15dp"
+            android:gravity="center_vertical"
+            android:text="@string/send_money"
+            android:textColor="@color/contrastColor"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/back_button" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#C7C7C7"
+            android:hint="@string/phone"
+            android:paddingHorizontal="25sp"
+            android:textColor="@color/black"
+            android:textColorHint="#616161"
+            app:startIconDrawable="@drawable/ic_baseline_phone_24">
+
+            <EditText
+                android:id="@+id/ph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:background="@android:color/transparent"
+                android:drawablePadding="10dp"
+                android:inputType="phone"
+                android:padding="16dp"
+                android:textSize="18sp"
+                tools:ignore="LabelFor,SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/mobpay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:background="@drawable/roundedcorners"
+                android:textColor="@color/styleFont"
+                app:backgroundTint="@color/styleButtonBackground"
+                android:text="@string/pay"
+                app:backgroundTintMode="add"
+                android:textSize="20sp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginHorizontal="25dp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/back3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/back_button"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/back"/>
+                <TextView
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile"
+                    android:textStyle="bold"
+                    android:textColor="@color/contrastColor"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="19sp"
+                    android:layout_margin="15dp"
+                    />
+                <ImageView
+                    android:id="@+id/faq_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/help"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:contentDescription="@string/back"/>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/view"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="120dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header">
+
+                <ImageView
+                    android:id="@+id/profileImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/profileImage"
+                    android:src="@drawable/img"
+                    tools:ignore="ImageContrastCheck"
+                    android:background="@color/background"/>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="44dp"
+                android:fontFamily="@font/ropa_sans"
+                android:text="@string/user_name"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/header" />
+
+            <TextView
+                android:id="@+id/mobileNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/mobile_number"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/editProfile"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="72dp"
+                android:text="@string/edit"
+                android:textColor="#0277BD"
+                android:textSize="18sp"
+                app:cornerRadius="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.272"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/mobileNumber"
+                app:strokeColor="#1381DA"
+                app:strokeWidth="2dp"
+                tools:ignore="TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/text5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/your_account"
+                android:layout_margin="20dp"
+                android:textSize="19sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/ropa_sans"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <HorizontalScrollView
+                android:id="@+id/nsv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text5">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    tools:ignore="ScrollViewSize">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cardDetails"
+                        android:layout_width="370dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="horizontal">
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="3dp"
+                        app:cardMaxElevation="8dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/add_account"
+                            android:src="@drawable/add_account"
+                            tools:ignore="ImageContrastCheck" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+
+
+            <TextView
+                android:id="@+id/account2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/ropa_sans"
+                android:text="@string/settings"
+                android:textSize="20sp"
+                android:textColor="@color/contrastColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.044"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nsv" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="3dp"
+                app:cardMaxElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/account2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/diffColor">
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/facePay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="48dp"
+                        android:text="@string/face_payment"
+                        android:textColor="#607D8B"
+                        android:checked="true"
+                        android:textOff="@string/off"
+                        android:textOn="@string/on"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:drawableStartCompat="@drawable/payment"
+                        app:switchTextAppearance="@style/BrandedSwitch.text"
+                        app:theme="@style/BrandedSwitch.control" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/languages"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:drawableStartCompat="@drawable/language_option"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24" />
+
+                    <TextView
+                        android:id="@+id/qrcodeOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/qr_code"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24"
+                        app:drawableStartCompat="@drawable/qr_code_blue" />
+
+                    <TextView
+                        android:id="@+id/themes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/themes_value"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:drawableStartCompat="@drawable/themes"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24"/>
+
+
+                    <TextView
+                        android:id="@+id/changePass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/change_password"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        app:drawableStartCompat="@drawable/change_password"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24"/>
+                <TextView
+                        android:id="@+id/logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/logout"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        app:drawableStartCompat="@drawable/ic_baseline_logout_24"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/add_face"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.821"
+                app:layout_constraintStart_toEndOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/header"
+                app:srcCompat="@drawable/add_face" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@string/add_face"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.847"
+                app:layout_constraintStart_toEndOf="@+id/mobileNumber"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+<!--<TextView-->
+    <!--                android:id="@+id/header"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="40dp"-->
+    <!--                android:layout_margin="15dp"-->
+    <!--                android:drawablePadding="15dp"-->
+    <!--                android:fontFamily="@font/roboto"-->
+    <!--                android:gravity="center_vertical"-->
+    <!--                android:text="@string/profile"-->
+    <!--                android:textColor="#666362"-->
+    <!--                android:textSize="19sp"-->
+    <!--                android:textStyle="bold"-->
+    <!--                app:drawableStartCompat="@drawable/back_button"-->
+    <!--                app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:drawableEndCompat="@drawable/help" />-->

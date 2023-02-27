@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "378985699581",
+    "project_id": "navpe-f7605",
+    "storage_bucket": "navpe-f7605.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378985699581:android:052a72c3103ae8c76d4694",
+        "android_client_info": {
+          "package_name": "com.example.navpe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378985699581-h18hokipn416rafpscpbprrsjgbmdamb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyCmibS4PDqKKXhK4slo95B0exANV9T88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378985699581-h18hokipn416rafpscpbprrsjgbmdamb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group>
+        <path
+            android:fillColor="@color/contrastColor"
+            android:pathData="M0 0.75c0-0.2 0.08-0.39 0.22-0.53S0.55 0 0.75 0h4.5c0.2 0 0.39 0.08 0.53 0.22S6 0.55 6 0.75 5.92 1.14 5.78 1.28 5.45 1.5 5.25 1.5H1.5v3.75c0 0.2-0.08 0.39-0.22 0.53S0.95 6 0.75 6 0.36 5.92 0.22 5.78 0 5.45 0 5.25v-4.5Zm18 0c0-0.2 0.08-0.39 0.22-0.53S18.55 0 18.75 0h4.5c0.2 0 0.39 0.08 0.53 0.22S24 0.55 24 0.75v4.5c0 0.2-0.08 0.39-0.22 0.53S23.45 6 23.25 6s-0.39-0.08-0.53-0.22-0.22-0.33-0.22-0.53V1.5h-3.75c-0.2 0-0.39-0.08-0.53-0.22S18 0.95 18 0.75ZM0.75 18c0.2 0 0.39 0.08 0.53 0.22s0.22 0.33 0.22 0.53v3.75h3.75c0.2 0 0.39 0.08 0.53 0.22S6 23.05 6 23.25s-0.08 0.39-0.22 0.53S5.45 24 5.25 24h-4.5c-0.2 0-0.39-0.08-0.53-0.22S0 23.45 0 23.25v-4.5c0-0.2 0.08-0.39 0.22-0.53S0.55 18 0.75 18Zm22.5 0c0.2 0 0.39 0.08 0.53 0.22S24 18.55 24 18.75v4.5c0 0.2-0.08 0.39-0.22 0.53S23.45 24 23.25 24h-4.5c-0.2 0-0.39-0.08-0.53-0.22S18 23.45 18 23.25s0.08-0.39 0.22-0.53 0.33-0.22 0.53-0.22h3.75v-3.75c0-0.2 0.08-0.39 0.22-0.53S23.05 18 23.25 18ZM6 6h1.5v1.5H6V6Z"
+            tools:ignore="VectorPath" />
+        <path
+            android:fillColor="@color/contrastColor"
+            android:pathData="M10.5 3H3v7.5h7.5V3Zm-6 1.5H9V9H4.5V4.5Zm3 12H6V18h1.5v-1.5Z"/>
+        <path
+            android:fillColor="@color/contrastColor"
+            android:pathData="M10.5 13.5H3V21h7.5v-7.5Zm-6 1.5H9v4.5H4.5V15Zm12-9H18v1.5h-1.5V6Z"/>
+        <path
+            android:fillColor="@color/contrastColor"
+            android:pathData="M13.5 3H21v7.5h-7.5V3ZM15 4.5V9h4.5V4.5H15ZM12 12v3h1.5v1.5H12V18h3v-3h1.5v3H18v-1.5h3V15h-4.5v-3H12Zm3 3h-1.5v-1.5H15V15Zm6 3h-1.5v1.5h-3V21H21v-3Zm-6 3v-1.5h-3V21h3Z"/>
+        <path
+            android:fillColor="@color/contrastColor"
+            android:pathData="M18 13.5h3V12h-3v1.5Z"/>
+    </group>
+</vector>

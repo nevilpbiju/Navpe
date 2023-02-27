@@ -1,0 +1,47 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.navpe" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="customColorValue">@color/white</item>
+        <item name="custom_yellow">#CABDAB</item>
+        <item name="custom_green_button">#9EAA91</item>
+
+    </style>
+    <style name="BrandedSwitch.control" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge" >
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">#1C92F2</item>
+        <item name="colorSwitchThumbNormal">#000000</item>
+    </style>
+
+    <style name="BrandedSwitch.text" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:textColor">#EA2522</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <style name="SCREEN">
+        <item name="android:backgroundTint">#939DAA</item>
+    </style>
+    <style name="FONT_COLOR">
+        <item name="color">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+    <style name="ccp">
+        <item name="ccp_contentColor">@color/white</item>
+    </style>
+
+    <style name="CARD_STYLE">
+        <item name="android:background">@drawable/trans_rounded</item>
+        <item name="android:backgroundTint">@color/diffColor</item>
+
+    </style>
+</resources>
