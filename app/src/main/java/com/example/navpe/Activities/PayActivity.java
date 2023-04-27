@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 
 import com.example.navpe.R;
 import com.example.navpe.Recognitions.DetectorActivity;
@@ -24,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
+import java.util.concurrent.Executor;
 
 public class PayActivity extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class PayActivity extends AppCompatActivity {
     TextView name1, upi1;
     EditText amount;
     ImageView back;
+    Intent intent;
+
     TextInputEditText message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +62,41 @@ public class PayActivity extends AppCompatActivity {
         upi1.setText(upi);
         name1.setText(name);
         back.setOnClickListener(v -> onBackPressed());
+        // creating a variable for our Executor
+        Executor executor = ContextCompat.getMainExecutor(this);
+        // this will give us result of AUTHENTICATION
+        final BiometricPrompt biometricPrompt = new BiometricPrompt(PayActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+        });
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("NAVPE")
+                .setDescription("Use your biometric to login ").setNegativeButtonText("Cancel").build();
 
         String mess = Objects.requireNonNull(message.getText()).toString();
         Button button = findViewById(R.id.confirm1);
         button.setOnClickListener(v -> {
             String amont = amount.getText().toString();
             if(amount.length() != 0 && Integer.parseInt(amont) > 0){
-                Intent intent = new Intent(PayActivity.this, DetectorActivity.class);
+                intent = new Intent(PayActivity.this, DetectorActivity.class);
                 intent.putExtra("Amount", amont);
                 intent.putExtra("message", mess);
                 intent.putExtra("UPI", upi);
                 intent.putExtra("ReceiverName", name);
                 intent.putExtra("FaceData", faceUrl);
                 if(faceUrl.length() > 0){
-                    startActivity(intent);
+                    biometricPrompt.authenticate(promptInfo);
                 }else{
                     Toast.makeText(this, "Please create a face Image from the Profile menu", Toast.LENGTH_SHORT).show();
                 }

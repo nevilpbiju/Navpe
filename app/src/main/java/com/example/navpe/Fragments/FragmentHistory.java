@@ -142,7 +142,7 @@ public class FragmentHistory extends Fragment {
                 if(getHistories.size() == 0){
                     l4.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
-                    String ull = "https://previews.123rf.com/images/alfianiqbal/alfianiqbal2008/alfianiqbal200800190/153929241-coffee-logo-design-vector-illustration-vintage-coffee-logo-vector-design-concept-for-cafe-and-restau.jpg";
+                    String ull = "https://firebasestorage.googleapis.com/v0/b/favfood-99554.appspot.com/o/no%20history%20found.png?alt=media&token=a2272056-2fc2-4101-b29b-a9f685d9b969";
                     Picasso.get().load(ull).into(imgNothing);
                 }
                 HistoryAdapter historyAdapter = new HistoryAdapter(getHistories);

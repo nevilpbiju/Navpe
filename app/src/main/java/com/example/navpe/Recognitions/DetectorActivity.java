@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.navpe.Activities.PaymentSuccessful;
+import com.example.navpe.Activities.UPI_Pin;
 import com.example.navpe.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -111,6 +112,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         TextView textView2 = findViewById(R.id.receiver);
         textView2.setText(receiverName);
 
+        //On UPI pin click
+        findViewById(R.id.pin_use).setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), UPI_Pin.class);
+            intent.putExtra("Function", "Pay");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+            String currentDateAndTime = sdf.format(new Date());
+            intent.putExtra("Amount", amount);
+            intent.putExtra("Time", currentDateAndTime);
+            intent.putExtra("UPI", upi);
+            intent.putExtra("ReceiverName", receiverName);
+            startActivity(intent);
+            finish();
+        });
         //On confirm click
         findViewById(R.id.confirm_pay).setOnClickListener(v -> {
             if(result.getTitle().equals(Objects.requireNonNull(user.getPhoneNumber()).substring(3)) && result.getDistance() >= 0.63){
@@ -137,10 +151,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         LoadImage();
         // Real-time contour detection of multiple faces
         FaceDetectorOptions options = new FaceDetectorOptions.Builder()
-                      .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
-                      .setContourMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
-                      .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
-                      .build();
+                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+                .setContourMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
+                .build();
         faceDetector = FaceDetection.getClient(options);
     }
     //Function to load image from the firebase
