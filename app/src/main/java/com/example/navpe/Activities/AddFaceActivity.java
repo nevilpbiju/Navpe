@@ -19,6 +19,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -313,7 +314,7 @@ public class AddFaceActivity extends AppCompatActivity {
         storeInFirebase(data1, "IMG" + uid + "- Original" + ".jpeg");
         storeInFirebase(data2, "IMG" + uid + ".jpeg");
 
-        encrypt(data2);
+        encrypt(data1);
         startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
     }
@@ -323,7 +324,7 @@ public class AddFaceActivity extends AppCompatActivity {
             File file = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DCIM) + File.separator + "encryptedFaceData.jpeg");
             if(file.exists()){
                 data = fileToBytes(file);
-                Log.e("Byte Array: ", Arrays.toString(data));
+                Log.e("Byte Array: ", Base64.encodeToString(data, Base64.DEFAULT));
                 storeInFirebase(data, "IMG" + uid + "-Encrypted" + ".jpeg");
             }
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException |
