@@ -19,6 +19,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
@@ -79,6 +80,12 @@ public class AESHelper {
             throw new RuntimeException(e);
         }
     }
+    public static Key getSecureRandomKey(String cipher) {
+        byte[] secureRandomKeyBytes = new byte[KEY_LENGTH / 8];
+        SecureRandom random = new SecureRandom();
+        random.nextBytes(secureRandomKeyBytes);
+        return new SecretKeySpec(secureRandomKeyBytes, cipher);
+    }
     private static byte[] generateSalt() {
         byte[] b = new byte[PKCS5_SALT_LENGTH];
         random.nextBytes(b);
@@ -130,6 +137,7 @@ public class AESHelper {
         byte[] salt = Base64.decode(sharedPreferences.getString("salt",null), Base64.DEFAULT);
         SecretKey key = deriveKey("A%D*G-KaPdSgVkYp3s6v9y/B?E(H+MbQ", salt);
         // on below line creating an file output stream for decrypted image.
+//        SecretKey key = (SecretKey) getSecureRandomKey("AES");
         FileOutputStream fos = new FileOutputStream(decFile.getPath());
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
         //Decode the string into correct(byte) format
