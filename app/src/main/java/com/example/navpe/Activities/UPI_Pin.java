@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,11 +25,13 @@ import java.util.Objects;
 public class UPI_Pin extends AppCompatActivity {
 
     protected EditText pass;
+    protected TextView balance;
     private  String pinValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upipin);
+        balance = findViewById(R.id.amount3);
         Intent inw = getIntent();
         String func = inw.getStringExtra("Function");
         pass = findViewById(R.id.pinUPI);
@@ -43,6 +46,7 @@ public class UPI_Pin extends AppCompatActivity {
             findViewById(R.id.layout2).setVisibility(View.GONE);
         }
         if(func.equals("Pay")) {
+            balance.setText(inw.getStringExtra("Amount"));
             pass.addTextChangedListener(new TextWatcher() {
                 @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
                 @Override
