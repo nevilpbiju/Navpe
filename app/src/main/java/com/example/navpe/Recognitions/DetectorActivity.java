@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.navpe.Activities.AESHelper;
 import com.example.navpe.Activities.PaymentSuccessful;
 import com.example.navpe.Activities.UPI_Pin;
 import com.example.navpe.R;
@@ -42,6 +43,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -50,6 +54,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.crypto.NoSuchPaddingException;
 
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
@@ -146,9 +152,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 Toast.makeText(this, "Please try again....", Toast.LENGTH_SHORT).show();
             }
         });
-
+        try {
+            urlBmp = AESHelper.decrypt(this);
+        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidKeyException | InvalidAlgorithmParameterException e) {
+            throw new RuntimeException(e);
+        }
+        Log.e("Tag: ", Objects.requireNonNull(urlBmp).toString());
         //Load the image from the firebase
-        LoadImage();
+        if(urlBmp != null) LoadImage();
         // Real-time contour detection of multiple faces
         FaceDetectorOptions options = new FaceDetectorOptions.Builder()
                 .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
