@@ -18,6 +18,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +62,15 @@ import com.google.mlkit.vision.face.FaceDetectorOptions;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
+import javax.crypto.NoSuchPaddingException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -230,7 +241,6 @@ public class AddFaceActivity extends AppCompatActivity {
             Log.e(TAG, "Error when bind preview", e);
         }
     }
-
     protected int getRotation() throws NullPointerException {
         if (previewView.getDisplay() == null) return 0;
         return previewView.getDisplay().getRotation();
@@ -304,10 +314,34 @@ public class AddFaceActivity extends AppCompatActivity {
         storeInFirebase(data1, "IMG" + uid + "- Original" + ".jpeg");
         storeInFirebase(data2, "IMG" + uid + ".jpeg");
 
-        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(in);
+        encrypt(data1);
+        startActivity(new Intent(getApplicationContext(), MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
+    }
+    private void encrypt(byte[] data) {
+        try {
+            AESHelper.encrypt(this, data);
+            File file = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_DCIM) + File.separator + "encryptedFaceData.jpeg");
+            if(file.exists()){
+                data = fileToBytes(file);
+                Log.e("Byte Array: ", Base64.encodeToString(data, Base64.DEFAULT));
+                storeInFirebase(data, "IMG" + uid + "-Encrypted" + ".jpeg");
+            }
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException |
+                 IOException | InvalidAlgorithmParameterException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private byte[] fileToBytes(File file){
+        byte[] bytes = new byte[0];
+        try(FileInputStream inputStream = new FileInputStream(file)) {
+            bytes = new byte[inputStream.available()];
+            //noinspection ResultOfMethodCallIgnored
+            inputStream.read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bytes;
     }
     public void storeInFirebase(byte[] data, String filename) {
         StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();

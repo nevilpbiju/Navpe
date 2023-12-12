@@ -127,4 +127,10 @@
     <string name="nothing">Nothing</string>
     <string name="enter_your_message">Enter your message</string>
     <string name="sent_message">Sent Message</string>
+    <string name="enter_upi">Enter UPI</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="VERSION">V 2.0.1</string>
+    <string name="set_pin">Set Pin</string>
+    <string name="set_a_4_digit_pin">Set a 4 digit pin</string>
+    <string name="lock_icon">Lock Icon</string>
 </resources>

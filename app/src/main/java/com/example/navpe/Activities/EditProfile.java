@@ -310,9 +310,7 @@ public class EditProfile extends AppCompatActivity implements DatePickerDialog.O
                     Log.e("Link",imageUrl);
                     StoreDatabase(username,emailId,phoneId, AddressId,dobId);
                 }));
-//        if(!new MainActivity().isConnected(getApplicationContext())){
-//            Toast.makeText(this, "Image will be uploaded when Internet is Available...", Toast.LENGTH_SHORT).show();
-//        }
+//        if(!new MainActivity().isConnected(getApplicationContext())) Toast.makeText(this, "Image will be uploaded when Internet is Available...", Toast.LENGTH_SHORT).show();
     }
     public static class DatePicker extends DialogFragment {
         @NonNull

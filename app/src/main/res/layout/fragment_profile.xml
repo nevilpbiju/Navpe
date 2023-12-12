@@ -235,6 +235,21 @@
                         android:textStyle="normal"
                         app:drawableStartCompat="@drawable/language_option"
                         app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24" />
+                    <TextView
+                        android:id="@+id/enterUpi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:drawablePadding="15dp"
+                        android:fontFamily="@font/ropa_sans"
+                        android:gravity="center_vertical"
+                        android:minHeight="45dp"
+                        android:text="@string/enter_upi"
+                        android:textColor="@color/contrastColor"
+                        android:textSize="20sp"
+                        android:textStyle="normal"
+                        app:drawableStartCompat="@drawable/pin_icon_blue"
+                        app:drawableEndCompat="@drawable/ic_baseline_navigate_next_24" />
 
                     <TextView
                         android:id="@+id/qrcodeOption"

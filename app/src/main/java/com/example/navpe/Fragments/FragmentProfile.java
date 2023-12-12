@@ -4,18 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,13 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navpe.Activities.AccountActivity;
 import com.example.navpe.Activities.AddFaceActivity;
 import com.example.navpe.Activities.EditProfile;
+import com.example.navpe.Activities.SetPIN;
 import com.example.navpe.Activities.FAQ;
 import com.example.navpe.Activities.Login;
 import com.example.navpe.Activities.ShowQR;
 import com.example.navpe.Adapters.AccountAdapter;
 import com.example.navpe.Models.GetAccount;
 import com.example.navpe.R;
-import com.example.navpe.Recognitions.SimilarityClassifier;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,8 +45,8 @@ import java.util.Objects;
 
 public class FragmentProfile extends Fragment implements
         CompoundButton.OnCheckedChangeListener{
-    TextView changePass, name, phNo,logout, qrCodeOption;
-    ImageView backProfile, help,image, addFaceOption;;
+    TextView changePass, name, phNo,logout, qrCodeOption, enterUPI;
+    ImageView backProfile, help,image, addFaceOption;
     CardView addBankAccount;
     View view;
     RecyclerView accountRecycler;
@@ -74,6 +73,7 @@ public class FragmentProfile extends Fragment implements
         name = view.findViewById(R.id.name);
         phNo = view.findViewById(R.id.mobileNumber);
         image = view.findViewById(R.id.profileImage2);
+        enterUPI = view.findViewById(R.id.enterUpi);
 
         changePass.setOnClickListener(v -> new FragmentChangePassword().Dialog(v));
         help.setOnClickListener(v -> {
@@ -92,20 +92,15 @@ public class FragmentProfile extends Fragment implements
         logout.setOnClickListener(v -> Logout());
 
         addBankAccount = view.findViewById(R.id.cardView2);
-        addBankAccount.setOnClickListener(v -> {
-            Intent intent = new Intent(view.getContext(), AccountActivity.class);
-            startActivity(intent);
-        });
+        addBankAccount.setOnClickListener(v -> startActivity(new Intent(view.getContext(), AccountActivity.class)));
+
+        enterUPI.setOnClickListener(v -> startActivity(new Intent(view.getContext(), SetPIN.class)));
+
         addFaceOption = view.findViewById(R.id.imageView5);
-        addFaceOption.setOnClickListener(v -> {
-            Intent intent = new Intent(view.getContext(), AddFaceActivity.class);
-            startActivity(intent);
-        });
+        addFaceOption.setOnClickListener(v -> startActivity(new Intent(view.getContext(), AddFaceActivity.class)));
+
         qrCodeOption = view.findViewById(R.id.qrcodeOption);
-        qrCodeOption.setOnClickListener(v -> {
-            Intent intent = new Intent(view.getContext(), ShowQR.class);
-            startActivity(intent);
-        });
+        qrCodeOption.setOnClickListener(v -> startActivity(new Intent(view.getContext(), ShowQR.class)));
 //        Edit the Current user Profile
         edit = view.findViewById(R.id.editProfile);
         edit.setOnClickListener(v -> v.getContext().startActivity(new Intent(view.getContext(), EditProfile.class)));
@@ -114,7 +109,6 @@ public class FragmentProfile extends Fragment implements
     }
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
         int id = buttonView.getId();
         if (id == R.id.facePay) {
             Log.e("Switch","True face");
@@ -150,6 +144,7 @@ public class FragmentProfile extends Fragment implements
                 qrCodeOption.setClickable(false);
                 addBankAccount.setClickable(false);
                 Toast.makeText(getContext(), "Enter your details for the payment features..", Toast.LENGTH_SHORT).show();
+                enterUPI.setVisibility(View.VISIBLE);
             }
             if (userData.size() == 6) {
             //For Name

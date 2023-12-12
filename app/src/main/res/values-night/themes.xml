@@ -42,6 +42,5 @@
     <style name="CARD_STYLE">
         <item name="android:background">@drawable/trans_rounded</item>
         <item name="android:backgroundTint">@color/diffColor</item>
-
     </style>
 </resources>

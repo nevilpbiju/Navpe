@@ -23,7 +23,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.navpe.Activities.AESHelper;
 import com.example.navpe.Activities.PaymentSuccessful;
+import com.example.navpe.Activities.UPI_Pin;
 import com.example.navpe.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +43,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -49,6 +54,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.crypto.NoSuchPaddingException;
 
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
@@ -111,6 +118,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         TextView textView2 = findViewById(R.id.receiver);
         textView2.setText(receiverName);
 
+        //On UPI pin click
+        findViewById(R.id.pin_use).setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), UPI_Pin.class);
+            intent.putExtra("Function", "Pay");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+            String currentDateAndTime = sdf.format(new Date());
+            intent.putExtra("Amount", amount);
+            intent.putExtra("Time", currentDateAndTime);
+            intent.putExtra("UPI", upi);
+            intent.putExtra("ReceiverName", receiverName);
+            startActivity(intent);
+            finish();
+        });
         //On confirm click
         findViewById(R.id.confirm_pay).setOnClickListener(v -> {
             if(result.getTitle().equals(Objects.requireNonNull(user.getPhoneNumber()).substring(3)) && result.getDistance() >= 0.63){
@@ -132,15 +152,21 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 Toast.makeText(this, "Please try again....", Toast.LENGTH_SHORT).show();
             }
         });
-
+        try {
+            urlBmp = AESHelper.decrypt(this);
+        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidKeyException | InvalidAlgorithmParameterException e) {
+            throw new RuntimeException(e);
+        }
+        Log.e("Tag: ", Objects.requireNonNull(urlBmp).toString());
         //Load the image from the firebase
-        LoadImage();
+        if(urlBmp != null) LoadImage();
         // Real-time contour detection of multiple faces
         FaceDetectorOptions options = new FaceDetectorOptions.Builder()
-                      .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
-                      .setContourMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
-                      .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
-                      .build();
+                .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
+                .setContourMode(FaceDetectorOptions.LANDMARK_MODE_NONE)
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_NONE)
+                .build();
         faceDetector = FaceDetection.getClient(options);
     }
     //Function to load image from the firebase
